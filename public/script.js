@@ -1,5 +1,6 @@
 const uploadBtn = document.getElementById("uploadBtn");
 const statusDiv = document.getElementById("status");
+const qrCanvas = document.getElementById("qrCanvas");
 
 uploadBtn.addEventListener("click", async () => {
   const number = document.getElementById("number").value;
@@ -14,16 +15,15 @@ uploadBtn.addEventListener("click", async () => {
   formData.append("number", number);
   formData.append("photo", photo);
 
-  statusDiv.textContent = "Uploading...";
+  statusDiv.textContent = "Generating QR code, scan with WhatsApp on your phone...";
 
-  const res = await fetch("/upload", {
-    method: "POST",
-    body: formData
-  });
-
+  const res = await fetch("/start-session", { method: "POST", body: formData });
   const data = await res.json();
-  if (data.ok) {
-    statusDiv.textContent = "Uploaded successfully! WhatsApp will get it.";
+
+  if (data.ok && data.qr) {
+    statusDiv.textContent = "Scan QR on your phone to complete linking!";
+    // Draw QR on canvas
+    import('qrcode').then(QRCode => QRCode.toCanvas(qrCanvas, data.qr));
   } else {
     statusDiv.textContent = "Error: " + (data.msg || "Unknown error");
   }
