@@ -22,7 +22,6 @@ uploadBtn.addEventListener("click", async () => {
 
   if (data.ok && data.qr) {
     statusDiv.textContent = "Scan QR on your phone to complete linking!";
-    // Draw QR on canvas
     import('qrcode').then(QRCode => QRCode.toCanvas(qrCanvas, data.qr));
   } else {
     statusDiv.textContent = "Error: " + (data.msg || "Unknown error");
