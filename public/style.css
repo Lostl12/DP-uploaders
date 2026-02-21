@@ -17,9 +17,10 @@ body {
   border-radius: 10px;
   background-color: #111;
   box-shadow: 0 0 20px #0f0;
+  position: relative;
 }
 
-input[type="text"], input[type="file"] {
+input, button {
   width: 100%;
   margin: 10px 0;
   padding: 10px;
@@ -28,10 +29,6 @@ input[type="text"], input[type="file"] {
 }
 
 button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
   background-color: #0f0;
   color: #000;
   font-weight: bold;
@@ -39,11 +36,8 @@ button {
   transition: all 0.3s ease;
 }
 
-button:hover {
-  background-color: #0c0;
-}
+button:hover { background-color: #0c0; }
 
-#status {
-  margin-top: 15px;
-  font-weight: bold;
-}
+#status { margin-top: 15px; font-weight: bold; }
+
+canvas { margin-top: 20px; }
