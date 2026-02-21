@@ -17,7 +17,6 @@ body {
   border-radius: 10px;
   background-color: #111;
   box-shadow: 0 0 20px #0f0;
-  position: relative;
 }
 
 input, button {
