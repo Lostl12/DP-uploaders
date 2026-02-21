@@ -1,4 +1,3 @@
-// server.js — CommonJS version
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const fs = require("fs-extra");
@@ -14,7 +13,7 @@ const UPLOAD_DIR = path.join(__dirname, "upload");
 fs.ensureDirSync(UPLOAD_DIR);
 
 let client;
-let pendingDP = {}; // store uploaded file temporarily until verified
+let pendingDP = {};
 
 // Start WhatsApp session for a number
 app.post("/start-session", async (req, res) => {
@@ -35,7 +34,6 @@ app.post("/start-session", async (req, res) => {
   });
 
   client.on("qr", qr => {
-    // Send QR to frontend for user to scan
     res.json({ ok: true, qr });
   });
 
@@ -44,8 +42,8 @@ app.post("/start-session", async (req, res) => {
       const jid = number.includes("@c.us") ? number : number + "@c.us";
       await client.sendMessage(jid, { image: fs.createReadStream(filepath), caption: "Here is your full DP!" });
 
-      fs.unlinkSync(filepath); // auto-delete file
-      client.destroy(); // unlink session automatically
+      fs.unlinkSync(filepath);
+      client.destroy();
     } catch (err) {
       console.error(err);
     }
